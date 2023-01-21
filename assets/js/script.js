@@ -12,9 +12,9 @@ let timeBlockContainer = $(".container");
 // get the current day and display it to the screen
 let momentDate = moment();
 currentDay.text(momentDate.format("dddd, MMMM Do, HH:mm"))
-    
+
 // make a function to render timeblocks
-function renderTimeBlocks(){
+function renderTimeBlocks() {
     // initialize variable for the current hour
     let currentHour = moment().format("HH");
 
@@ -26,13 +26,13 @@ function renderTimeBlocks(){
     let hourBlocks = ["09", "10", "11", "12", "13", "14", "15", "16", "17"];
 
     // create a loop to display a 9am to 5 pm timeblock
-    for (let i = 0; i < hourBlocks.length; i++){
+    for (let i = 0; i < hourBlocks.length; i++) {
         // ROW LIST
         // create row element <li> with class of row
         let row = $("<div>").attr("class", "row");
         // append to timeBlock <ul>
         timeBlock.append(row);
-        
+
         // HOUR DIV
         // create hour element for each block
         let hour = $("<div>").attr("class", "hour");
@@ -43,8 +43,10 @@ function renderTimeBlocks(){
 
         // INPUT DIV
         // create input text for each block
-        let input = $("<textarea>");
+        let input = $("<textarea>" + i);
         row.append(input);
+        // user event is saved to localstorage
+        input.val(JSON.parse(localStorage.getItem("event")));
 
         // BUTTON DIV
         // create save button for each block
@@ -56,22 +58,24 @@ function renderTimeBlocks(){
 
         // if-else conditional to check current hour to time-block hour
         // and assign class based on
-        if (hourBlocks[i] < currentHour){
+        if (hourBlocks[i] < currentHour) {
             input.attr("class", "past");
         }
-        else if (hourBlocks[i] > currentHour){
+        else if (hourBlocks[i] > currentHour) {
             input.attr("class", "future");
-        } 
+        }
         else {
             input.attr("class", "present");
-        }            
+        }
+
+        // add on click event to button 
+        button.on("click", function (e) {
+            //NEED TO FIX
+            // save events to all textAreas instead than it's index
+            localStorage.setItem("event", JSON.stringify([input.val()]));
+
+        })
     }
 }
-
 renderTimeBlocks();
-
-// each timeblock has a different color based on the current time
-    // red for the present 
-    // green for the future
-
 // ******************************************************
