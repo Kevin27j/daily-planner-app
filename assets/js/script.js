@@ -50,6 +50,9 @@ function renderTimeBlocks(){
         // create save button for each block
         let button = $("<button>").attr("class", "saveBtn");
         row.append(button);
+        // append icon to button
+        let buttonIcon = $('<i class="fa-solid fa-floppy-disk">')
+        button.append(buttonIcon);
 
         // if-else conditional to check current hour to time-block hour
         // and assign class based on
@@ -61,11 +64,8 @@ function renderTimeBlocks(){
         } 
         else {
             input.attr("class", "present");
-        }
-            
+        }            
     }
-
-    // use moment.js to display blocks based on the current day time
 }
 
 renderTimeBlocks();
