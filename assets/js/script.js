@@ -1,9 +1,3 @@
-// use DOM manipulation
-// integration of third-party API
-// jQuery
-// moment.js
-
-// ******************************************************
 // currentDay ID element
 let currentDay = $("#currentDay");
 // timeblocks element container
@@ -43,10 +37,10 @@ function renderTimeBlocks() {
 
         // INPUT DIV
         // create input text for each block
-        let input = $("<textarea>" + i);
+        let input = $("<textarea>");
         row.append(input);
-        // user event is saved to localstorage
-        input.val(JSON.parse(localStorage.getItem("event")));
+        // user event is displayed to screen
+        input.text(JSON.parse(localStorage.getItem("event" + hourBlocks[i])));
 
         // BUTTON DIV
         // create save button for each block
@@ -70,12 +64,9 @@ function renderTimeBlocks() {
 
         // add on click event to button 
         button.on("click", function (e) {
-            //NEED TO FIX
-            // save events to all textAreas instead than it's index
-            localStorage.setItem("event", JSON.stringify([input.val()]));
-
+            // save event to localStorage
+            localStorage.setItem("event" + hourBlocks[i], JSON.stringify(input.val()));
         })
     }
 }
 renderTimeBlocks();
-// ******************************************************
